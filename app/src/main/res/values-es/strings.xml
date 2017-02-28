@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="main">Inicio</string>
+
+    <string name="about_to">Acerca de</string>
+
+    <string name="teams">Equipos</string>
+
+</resources>
