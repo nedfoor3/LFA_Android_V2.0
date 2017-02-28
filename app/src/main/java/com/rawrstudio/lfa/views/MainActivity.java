@@ -20,6 +20,7 @@ import com.rawrstudio.lfa.interfaces.MainActivity.MainActivityView;
 import com.rawrstudio.lfa.interfaces.Menu.MenuPresenter;
 import com.rawrstudio.lfa.presenters.MainActivityPresenterImpl;
 import com.rawrstudio.lfa.presenters.MenuPresenterImpl;
+import com.thefinestartist.finestwebview.FinestWebView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
 
     private MainActivityPresenter mainActivityPresenter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerviewNews.setLayoutManager(linearLayoutManager);
-
 
         menuPresenter = new MenuPresenterImpl(this);
         menuPresenter.onClickOptionMenu(lateralMenu, drawerLayoutMain);

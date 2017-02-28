@@ -37,6 +37,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder>{
         String titulo = mListNews.get(position).getTitle().getRendered();
         holder.setTitle(titulo);
 
+        Integer id = mListNews.get(position).getId();
+        holder.setId(id);
+
     }
 
     @Override
