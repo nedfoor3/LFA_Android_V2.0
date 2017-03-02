@@ -14,13 +14,18 @@ import com.rawrstudio.lfa.views.TeamsActivity;
 
 
 /**
+ * Implementacion de Menu Presenter
  * Created by Ricardo on 24/02/2017.
  */
-
 public class MenuPresenterImpl implements MenuPresenter {
 
-    Activity view;
+    private Activity view;
 
+    /**
+     * Instantiates a new Menu presenter.
+     *
+     * @param view the view
+     */
     public MenuPresenterImpl(MainActivity view) {
         this.view = view;
     }
@@ -33,6 +38,7 @@ public class MenuPresenterImpl implements MenuPresenter {
 
                 boolean activityTransaction = false;
 
+                //Switch para configurar acción de cada elemento de menu lateral
                 switch (item.getItemId()) {
                     case R.id.menu_teams:
                         Intent intent = new Intent(view, TeamsActivity.class);

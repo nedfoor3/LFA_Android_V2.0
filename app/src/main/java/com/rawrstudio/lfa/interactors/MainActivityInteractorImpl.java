@@ -14,9 +14,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * Main Activity Interacto Implement
  * Created by Ricardo on 25/02/2017.
  */
-
 public class MainActivityInteractorImpl implements MainActivityInteractor {
 
     private static final String ON_RESPONSE = "onResponse";

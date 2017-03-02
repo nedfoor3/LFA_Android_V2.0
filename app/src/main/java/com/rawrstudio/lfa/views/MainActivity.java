@@ -1,9 +1,11 @@
 package com.rawrstudio.lfa.views;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,14 +20,17 @@ import com.rawrstudio.lfa.R;
 import com.rawrstudio.lfa.interfaces.MainActivity.MainActivityPresenter;
 import com.rawrstudio.lfa.interfaces.MainActivity.MainActivityView;
 import com.rawrstudio.lfa.interfaces.Menu.MenuPresenter;
+import com.rawrstudio.lfa.interfaces.Menu.MenuView;
 import com.rawrstudio.lfa.presenters.MainActivityPresenterImpl;
 import com.rawrstudio.lfa.presenters.MenuPresenterImpl;
-import com.thefinestartist.finestwebview.FinestWebView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainActivityView {
+/**
+ * MainActivity - Actividad inicial - Blog
+ */
+public class MainActivity extends AppCompatActivity implements MenuView, MainActivityView, SwipeRefreshLayout.OnRefreshListener {
 
 
     @BindView(R.id.toolbar)
@@ -40,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     NavigationView lateralMenu;
     @BindView(R.id.drawer_layout_main)
     DrawerLayout drawerLayoutMain;
+    @BindView(R.id.swipeContainer)
+    SwipeRefreshLayout swipeContainer;
     private MenuPresenter menuPresenter;
 
     private MainActivityPresenter mainActivityPresenter;
@@ -53,22 +60,26 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
 
         setToolbarValues();
 
-        //RecyclerView
+        //RecyclerView Configuraciones
         recyclerviewNews.setHasFixedSize(true);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerviewNews.setLayoutManager(linearLayoutManager);
 
+        //Menu Configuraciones
         menuPresenter = new MenuPresenterImpl(this);
         menuPresenter.onClickOptionMenu(lateralMenu, drawerLayoutMain);
 
-
+        //Presenter para metodos de logica en main View
         mainActivityPresenter = new MainActivityPresenterImpl(this, recyclerviewNews);
-        mainActivityPresenter.loadNews();
+        mainActivityPresenter.loadNews(0);
+
+        //Controlar Push and update de recyclerView
+        swipeContainer.setOnRefreshListener(this);
 
 
     }
 
+    @Override
     public void setToolbarValues() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
@@ -101,6 +112,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     }
 
     @Override
+    public void hideProgressSwipContainer() {
+        swipeContainer.setRefreshing(false);
+    }
+
+    @Override
     public void showError() {
         Toast.makeText(this, "show error", Toast.LENGTH_SHORT).show();
     }
@@ -108,5 +124,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     @Override
     public void hideError() {
         Toast.makeText(this, "hide error", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Called when a swipe gesture triggers a refresh.
+     */
+    @Override
+    public void onRefresh() {
+        Toast.makeText(this, "Cargando nuevas entradas", Toast.LENGTH_SHORT).show();
+        mainActivityPresenter.loadNewsSwipeContainer(1);
+
+
     }
 }

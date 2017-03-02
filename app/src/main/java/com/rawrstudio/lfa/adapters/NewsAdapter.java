@@ -19,6 +19,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder>{
 
     private List<News> mListNews;
 
+    /**
+     * Instantiates a new News adapter.
+     *
+     * @param listNews the list news
+     */
     public NewsAdapter(List<News> listNews) {
         this.mListNews = listNews;
     }
