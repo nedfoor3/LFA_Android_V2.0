@@ -2,9 +2,11 @@ package com.rawrstudio.lfa.viewholders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.rawrstudio.lfa.R;
 import com.thefinestartist.finestwebview.FinestWebView;
 
@@ -15,6 +17,7 @@ import com.thefinestartist.finestwebview.FinestWebView;
 public class NewsViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
 
     private TextView mTitleTV;
+    private ImageView mFeatureImage;
     private Integer idNote;
 
 
@@ -28,6 +31,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder  implements View.OnC
 
         itemView.setOnClickListener(this);
         mTitleTV = (TextView) itemView.findViewById(R.id.news_title);
+        mFeatureImage = (ImageView) itemView.findViewById(R.id.news_image_feature);
     }
 
     /**
@@ -45,6 +49,10 @@ public class NewsViewHolder extends RecyclerView.ViewHolder  implements View.OnC
      * @param id the id
      */
     public void setId(Integer id){ idNote = id;}
+
+    public void setFeatureImage(String UrlFeatureImage) {
+        Glide.with(itemView.getContext()).load(UrlFeatureImage).into(mFeatureImage);
+    }
 
     @Override
     public void onClick(View view) {

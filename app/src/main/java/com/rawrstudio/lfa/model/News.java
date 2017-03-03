@@ -1,20 +1,18 @@
 package com.rawrstudio.lfa.model;
 
-/** News
+/**
+ * News
  * Created by Ricardo on 26/02/2017.
  */
 public class News {
 
     private Integer id;
     private String date;
-    private String dateGmt;
-    private String slug;
     private String type;
     private String link;
     private Title title;
-    private String author;
-    private String featuredMedia;
-    private String pingStatus;
+    private Content content;
+    private Better_Featured_Image better_featured_image;
 
     /**
      * Gets id.
@@ -50,42 +48,6 @@ public class News {
      */
     public void setDate(String date) {
         this.date = date;
-    }
-
-    /**
-     * Gets date gmt.
-     *
-     * @return the date gmt
-     */
-    public String getDateGmt() {
-        return dateGmt;
-    }
-
-    /**
-     * Sets date gmt.
-     *
-     * @param dateGmt the date gmt
-     */
-    public void setDateGmt(String dateGmt) {
-        this.dateGmt = dateGmt;
-    }
-
-    /**
-     * Gets slug.
-     *
-     * @return the slug
-     */
-    public String getSlug() {
-        return slug;
-    }
-
-    /**
-     * Sets slug.
-     *
-     * @param slug the slug
-     */
-    public void setSlug(String slug) {
-        this.slug = slug;
     }
 
     /**
@@ -143,57 +105,39 @@ public class News {
     }
 
     /**
-     * Gets author.
+     * Gets content.
      *
-     * @return the author
+     * @return the content
      */
-    public String getAuthor() {
-        return author;
+    public Content getContent() {
+        return content;
     }
 
     /**
-     * Sets author.
+     * Sets content.
      *
-     * @param author the author
+     * @param content the content
      */
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setContent(Content content) {
+        this.content = content;
     }
 
     /**
-     * Gets featured media.
+     * Gets better featured image.
      *
-     * @return the featured media
+     * @return the better featured image
      */
-    public String getFeaturedMedia() {
-        return featuredMedia;
+    public Better_Featured_Image getBetter_featured_image() {
+        return better_featured_image;
     }
 
     /**
-     * Sets featured media.
+     * Sets better featured image.
      *
-     * @param featuredMedia the featured media
+     * @param better_featured_image the better featured image
      */
-    public void setFeaturedMedia(String featuredMedia) {
-        this.featuredMedia = featuredMedia;
-    }
-
-    /**
-     * Gets ping status.
-     *
-     * @return the ping status
-     */
-    public String getPingStatus() {
-        return pingStatus;
-    }
-
-    /**
-     * Sets ping status.
-     *
-     * @param pingStatus the ping status
-     */
-    public void setPingStatus(String pingStatus) {
-        this.pingStatus = pingStatus;
+    public void setBetter_featured_image(Better_Featured_Image better_featured_image) {
+        this.better_featured_image = better_featured_image;
     }
 
     @Override
@@ -201,14 +145,11 @@ public class News {
         return "News{" +
                 "id=" + id +
                 ", date='" + date + '\'' +
-                ", dateGmt='" + dateGmt + '\'' +
-                ", slug='" + slug + '\'' +
                 ", type='" + type + '\'' +
                 ", link='" + link + '\'' +
                 ", title=" + title +
-                ", author='" + author + '\'' +
-                ", featuredMedia='" + featuredMedia + '\'' +
-                ", pingStatus='" + pingStatus + '\'' +
+                ", content=" + content +
+                ", better_featured_image=" + better_featured_image +
                 '}';
     }
 }

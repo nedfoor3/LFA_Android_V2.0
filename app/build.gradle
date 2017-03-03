@@ -44,5 +44,9 @@ dependencies {
     //Web View
     compile 'com.thefinestartist:finestwebview:1.2.7'
 
+    // PARA VISUALIZAR IMAGENES DESDE URL EN IMAGEVIEW
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+
     testCompile 'junit:junit:4.12'
 }

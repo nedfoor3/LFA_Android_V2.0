@@ -1,7 +1,6 @@
 package com.rawrstudio.lfa.views;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -39,14 +38,14 @@ public class MainActivity extends AppCompatActivity implements MenuView, MainAct
     ProgressBar progressBar;
     @BindView(R.id.recyclerview_news)
     RecyclerView recyclerviewNews;
+    @BindView(R.id.swipeContainer)
+    SwipeRefreshLayout swipeContainer;
     @BindView(R.id.main_toolbar)
     LinearLayout mainToolbar;
     @BindView(R.id.lateral_menu)
     NavigationView lateralMenu;
     @BindView(R.id.drawer_layout_main)
     DrawerLayout drawerLayoutMain;
-    @BindView(R.id.swipeContainer)
-    SwipeRefreshLayout swipeContainer;
     private MenuPresenter menuPresenter;
 
     private MainActivityPresenter mainActivityPresenter;
