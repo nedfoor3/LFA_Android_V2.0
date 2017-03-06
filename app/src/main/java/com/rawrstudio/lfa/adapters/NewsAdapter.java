@@ -8,15 +8,20 @@ import android.view.ViewGroup;
 import com.rawrstudio.lfa.R;
 import com.rawrstudio.lfa.model.News;
 import com.rawrstudio.lfa.viewholders.NewsViewHolder;
+import com.rawrstudio.lfa.viewholders.NewsWithoutImageFeatureViewHolder;
 
 import java.util.List;
 
 /**
  * Created by Ricardo on 27/02/2017.
  */
-public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<News> mListNews;
+
+    private static final int ID_LAYOUT_WITHOUT_IMAGE_FEATURE = 0;
+    private static final int ID_LAYOUT_WITH_IMAGE_FEATURE = 1;
+
 
     /**
      * Instantiates a new News adapter.
@@ -28,33 +33,81 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     }
 
     @Override
-    public NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View itemView = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.row_news_basic, parent, false);
-        NewsViewHolder newsViewHolder = new NewsViewHolder(itemView);
-        return newsViewHolder;
+        View itemView = null;
+
+        if (ID_LAYOUT_WITHOUT_IMAGE_FEATURE == viewType){
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_news_without_feature_image, parent, false);
+            return new NewsWithoutImageFeatureViewHolder(itemView);
+        } else {
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_news_basic, parent, false);
+            return new NewsViewHolder(itemView);
+        }
+
+
+
     }
 
+
     @Override
-    public void onBindViewHolder(NewsViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-
-        String titulo = mListNews.get(position).getTitle().getRendered();
-        holder.setTitle(titulo);
-
-        Integer id = mListNews.get(position).getId();
-        holder.setId(id);
+        String titulo;
+        Integer id;
+        int flag = 0 ;
 
         if (mListNews.get(position).getBetter_featured_image() != null) {
-            String urlImage = mListNews.get(position).getBetter_featured_image().getSource_url();
-            holder.setFeatureImage(urlImage);
+            flag = 1;
+
         }
+        switch (flag) {
+            case ID_LAYOUT_WITHOUT_IMAGE_FEATURE:
+                NewsWithoutImageFeatureViewHolder holderWithout = new NewsWithoutImageFeatureViewHolder(holder.itemView);
+
+                titulo = mListNews.get(position).getTitle().getRendered();
+                holderWithout.setTitle(titulo);
+
+                id = mListNews.get(position).getId();
+                holderWithout.setId(id);
+
+                break;
+
+            case ID_LAYOUT_WITH_IMAGE_FEATURE:
+                NewsViewHolder mHolder = new NewsViewHolder(holder.itemView);
+
+                titulo = mListNews.get(position).getTitle().getRendered();
+                mHolder.setTitle(titulo);
+
+                id = mListNews.get(position).getId();
+                mHolder.setId(id);
+
+                //if (mListNews.get(position).getBetter_featured_image() != null) {
+                    String urlImage = mListNews.get(position).getBetter_featured_image().getSource_url();
+                    mHolder.setFeatureImage(urlImage);
+                //}
+                break;
+        }
+
     }
 
     @Override
     public int getItemCount() {
         return mListNews.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        News itemNews = mListNews.get(position);
+
+        if (itemNews.getBetter_featured_image() == null) {
+            return ID_LAYOUT_WITHOUT_IMAGE_FEATURE;
+        } else {
+            return ID_LAYOUT_WITH_IMAGE_FEATURE;
+        }
+
+
     }
 
 
